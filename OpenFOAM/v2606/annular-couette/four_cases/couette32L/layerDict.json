@@ -1,0 +1,11 @@
+{
+  "patches": [
+    "inner",
+    "outer"
+  ],
+  "nLayers": 4,
+  "expansionRatio": 1.25,
+  "relativeSizes": false,
+  "finalLayerThickness": 0.013125,
+  "minThickness": 0.00046875
+}

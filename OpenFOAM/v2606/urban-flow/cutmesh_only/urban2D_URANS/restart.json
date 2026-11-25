@@ -1,0 +1,12 @@
+{
+  "source": "../urban2D",
+  "method": "copy",
+  "fields": [
+    "U",
+    "epsilon",
+    "k",
+    "nut",
+    "p",
+    "phi"
+  ]
+}

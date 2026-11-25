@@ -1,0 +1,47 @@
+Header
+  Mesh DB "." "mesh"
+End
+Simulation
+  Coordinate System = Cartesian 2D
+  Simulation Type = Steady State
+  Steady State Max Iterations = 1
+  Angular Frequency = Real 433.53978619539146
+End
+Body 1
+  Target Bodies(1) = 1
+  Equation = 1
+  Material = 1
+End
+Equation 1
+  Active Solvers(2) = 1 2
+End
+Material 1
+  Density = Real 1.2
+  Sound Speed = Real 343
+  Sound Damping = Real 0
+End
+Solver 1
+  Equation = "Helmholtz"
+  Procedure = "HelmholtzSolve" "HelmholtzSolver"
+  Variable = "Pressure Wave"
+  Variable DOFs = 2
+  Linear System Solver = Direct
+  Linear System Direct Method = UMFPACK
+End
+Solver 2
+  Equation = "Result output"
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+  Output File Name = "pressure"
+  Vtu Format = Logical True
+  Binary Output = Logical False
+  Single Precision = Logical False
+  Scalar Field 1 = "Pressure Wave 1"
+  Scalar Field 2 = "Pressure Wave 2"
+End
+Boundary Condition 1
+  Target Boundaries(1) = 1
+  ! Outward pressure derivative at x=0 for inward velocity +U exp(i omega t).
+  Wave Flux 1 = Real 0
+  Wave Flux 2 = Real 520.24774343446973
+End
+! The far end and both side walls have the natural, zero-flux condition.

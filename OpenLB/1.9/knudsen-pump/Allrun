@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+mode=${1:-base}
+case "$mode" in
+base)
+src="$OLB_ROOT/examples/microfluidics/knudsenPump3d/knudsenPump3d.cpp"
+      # Initial pressure setter takes SI units, not a previously converted lattice pressure.
+      sed -e 's/{0,1,2}), pL0);/{0,1,2}), pM);/' -e 's/if ( iT%vtmIter==0 || lastTimeStep )/if ( false )/' -e '/^  simulate(myCase);/a #include "pump.inc"' "$src" > "$build/sample.cpp"
+      cp "$here/pump.inc" "$build/"
+      build_case
+      for n in 9 13; do run "N$n" --RESOLUTION "$n" --KNUDSEN 0.1 --B_COEFF 0 --MAX_PHYS_T 0.000008 --PHYS_INTERVAL 0.00000008; done;;
+pump|conservative|flux|gradient|area)
+src="$OLB_ROOT/examples/microfluidics/knudsenPump3d/knudsenPump3d.cpp"
+  sed -e 's/{0,1,2}), pL0);/{0,1,2}), pM);/' -e 's/if ( iT%vtmIter==0 || lastTimeStep )/if ( false )/' -e '/^  simulate(myCase);/a #include "pump.inc"' "$src" > "$build/sample.cpp"
+  cp "$here/pump.inc" "$build"
+  if [[ "$mode" == gradient ]]; then
+    cp "$here/pump_gradient.inc" "$build"
+    sed -i '/^  setBouzidiKnudsenSlipVelocity.*knudsenPump);/a #include "pump_gradient.inc"' "$build/sample.cpp"
+  fi
+  if [[ "$mode" == flux || "$mode" == gradient || "$mode" == area ]]; then
+    cp "$here/pump_flux.inc" "$build"
+    sed -i '/#include "pump.inc"/a #include "pump_flux.inc"' "$build/sample.cpp"
+  fi
+  if [[ "$mode" != pump ]]; then
+    # Preserve mass at an impermeable wall. Interpolation can change the
+    # reflected mass relative to the post-collision population streamed out.
+    # Returning the difference to the rest population leaves momentum unchanged.
+    header="$OLB_ROOT/src/boundary/postprocessor/knudsenVelocityPostProcessor.h"
+    {
+      head -n 23 "$header"
+      echo 'namespace olb {'
+      sed -n '/^  template<bool thermalCreep = false>/,/^}/p' "$header" |
+        sed -e 's/class KnudsenVelocityPostProcessor/class ConservativeKnudsenVelocityPostProcessor/' \
+            -e '/auto x_s = cell.neighbor(c);/a\            const V outgoing = x_s[iPop];' \
+            -e '/V{1}\/q\[iPop\] \* veloTerm);/a\            cell[0] += outgoing - cell[iPop_opposite];' \
+            -e '/cell\[iPop_opposite\] = cell\[iPop\] - V{2} \* veloTerm;/a\            cell[0] += cell.neighbor(descriptors::c<DESCRIPTOR>(iPop))[iPop] - cell[iPop_opposite];'
+    } > "$build/conservative.h"
+    sed -i -e 's/KnudsenVelocityPostProcessor<true>/ConservativeKnudsenVelocityPostProcessor<true>/g' -e '/^using namespace olb;/i #include "conservative.h"' "$build/sample.cpp"
+    grep -q 'cell\[0\] += outgoing' "$build/conservative.h"
+    build_case "$mode"
+    grids="13 17"
+    if [[ "$mode" == flux ]]; then grids="21"; fi
+    # Among odd diameters 13..21, N=15 best represents the circular area
+    # using the original equal-area sum (177 cells, geometric area 176.71).
+    if [[ "$mode" == area ]]; then grids="15"; fi
+  else
+    build_case pump
+    grids="17 21"
+  fi
+  for n in $grids; do run "${mode}_N$n" --RESOLUTION "$n" --KNUDSEN 0.1 --B_COEFF 0 --MAX_PHYS_T .000008 --PHYS_INTERVAL .00000008; done;;
+*) echo "Choose: base pump conservative flux gradient area" >&2; exit 2;;
+esac

@@ -1,0 +1,9 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object controlDict;
+}
+application buoyantBoussinesqSimpleFoam; startFrom startTime; startTime 0; stopAt endTime; writeFormat ascii; writePrecision 12; timePrecision 10; runTimeModifiable false;
+endTime 14000; deltaT 1; writeControl timeStep; writeInterval 14000;

@@ -1,0 +1,8 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object fvSolution;
+}
+solvers { p { solver PCG; preconditioner { preconditioner GAMG; smoother DICGaussSeidel; nVcycles 1; nPreSweeps 1; nPostSweeps 1; nFinestSweeps 1; } tolerance 2e-9; relTol 0.02; } U { solver smoothSolver; smoother symGaussSeidel; tolerance 1e-13; relTol .02; } } SIMPLE { nNonOrthogonalCorrectors 0; consistent yes; pRefCell 0; pRefValue 0; } relaxationFactors { equations { U .85; } }

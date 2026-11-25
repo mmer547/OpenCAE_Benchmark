@@ -1,0 +1,8 @@
+{
+  "source": "../../../dfg-cylinder-re20/dfg_layers/centred/F01_10",
+  "method": "scale",
+  "fields": [
+    "U",
+    "p"
+  ]
+}

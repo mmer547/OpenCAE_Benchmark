@@ -1,0 +1,9 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object controlDict;
+}
+application simpleFoam; startFrom startTime; startTime 0; stopAt endTime; endTime 11000; deltaT 1; writeControl runTime; writeInterval 11000; writeFormat ascii; writePrecision 11; timePrecision 10; runTimeModifiable false;
+functions { shear { type wallShearStress; libs (fieldFunctionObjects); patches (lowerWall upperWall); writeControl onEnd; } yp { type yPlus; libs (fieldFunctionObjects); writeControl onEnd; } }

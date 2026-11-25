@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+cp "$here/posts.cpp" "$build/sample.cpp"
+build_case
+for fraction in 0.20 0.40; do
+  for n in 17 33 65; do
+    for method in halfway bouzidi; do
+      run "phi$fraction/N$n/$method" "$n" "$fraction" "$method"
+    done
+  done
+done

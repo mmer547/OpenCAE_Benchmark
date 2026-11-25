@@ -1,0 +1,8 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object fvSolution;
+}
+solvers { p {solver GAMG; smoother GaussSeidel; tolerance 1e-8; relTol .03;} "(U|k|epsilon)" {solver smoothSolver; smoother symGaussSeidel; tolerance 1e-9; relTol .05;} } SIMPLE {nNonOrthogonalCorrectors 1; residualControl {p 8e-5; U 2e-5; "(k|epsilon)" 4e-5;}} relaxationFactors {fields {p .3;} equations {U .55; k .5; epsilon .5;}}

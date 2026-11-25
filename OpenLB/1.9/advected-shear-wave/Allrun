@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+mode=${1:-base}
+case "$mode" in
+base)
+cp "$here/shear.cpp" "$build/sample.cpp"
+      build_case
+      for n in 32 64; do for u in 0 0.05 0.10; do run "N${n}_U${u}" "$n" "$u"; done; done;;
+product)
+cp "$here/product.h" "$build"
+  sed -e '/^using Wave=/i #include "product.h"' -e 's/set<BGKdynamics>/set<ProductBGK>/' "$here/shear.cpp" > "$build/sample.cpp"
+  build_case product
+  for n in 32 64; do for u in 0 .05 .10; do run "product_N${n}_U${u}" "$n" "$u"; done; done;;
+third-order)
+sed -e '/^using Wave=/i template<typename T,typename DESCRIPTOR,typename MOMENTA=momenta::BulkTuple> using CubicBGK=dynamics::Tuple<T,DESCRIPTOR,MOMENTA,equilibria::ThirdOrder,collision::BGK>;' -e 's/set<BGKdynamics>/set<CubicBGK>/' "$here/shear.cpp" > "$build/sample.cpp"
+  build_case shear
+  for n in 32 64; do for u in 0 .05 .10; do run "shear_N${n}_U${u}" "$n" "$u"; done; done;;
+*) echo "Choose: base third-order product" >&2; exit 2;;
+esac

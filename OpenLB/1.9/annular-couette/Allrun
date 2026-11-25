@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+cp "$here/couette.cpp" "$build/sample.cpp"
+build_case
+for n in 8 16 32; do
+  for method in halfway bouzidi; do
+    OPENLB_WALL_SCHEME="$method" run "$method/N$n" --RESOLUTION "$n"
+  done
+done

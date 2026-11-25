@@ -1,0 +1,19 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class volScalarField;
+ object k;
+}
+dimensions [0 2 -2 0 0 0 0];
+@INTERNAL_FIELD@
+
+boundaryField
+{
+ inlet { type fixedValue; value uniform 0.000326; }
+ outlet { type zeroGradient; }
+ blade { type kqRWallFunction; value uniform 0.000326; }
+ housing { type kqRWallFunction; value uniform 0.000326; }
+ rotor_AMI1 { type cyclicAMI; }
+ rotor_AMI2 { type cyclicAMI; }
+}

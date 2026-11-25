@@ -1,0 +1,10 @@
+{
+  "patches": [
+    "cylinder"
+  ],
+  "nLayers": 4,
+  "expansionRatio": 1.25,
+  "relativeSizes": false,
+  "finalLayerThickness": 0.0007,
+  "minThickness": 3.3333333333333335e-05
+}

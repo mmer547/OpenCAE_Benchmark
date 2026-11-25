@@ -1,0 +1,39 @@
+{
+  "domain": "domain.stl",
+  "baseCellSize": 0.001,
+  "surfaceRefinement": {
+    "default": 0
+  },
+  "fillThinGaps": 0,
+  "fillThinWalls": 0,
+  "thinCutCells": 0,
+  "strictInput": true,
+  "patchTypes": {
+    "wall0": "wall",
+    "wall1": "wall",
+    "wall2": "wall",
+    "wall3": "wall",
+    "wall4": "wall",
+    "inlet": "patch",
+    "outlet": "patch"
+  },
+  "writeFormat": "ascii",
+  "refinementRegions": [
+    {
+      "cylinder": {
+        "point1": [
+          0,
+          0,
+          -0.064
+        ],
+        "point2": [
+          0,
+          0,
+          0.045
+        ],
+        "radius": 0.0045
+      },
+      "level": 1
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "source": "../DFG20dt",
+  "method": "idw2d",
+  "fields": [
+    "U",
+    "p"
+  ]
+}

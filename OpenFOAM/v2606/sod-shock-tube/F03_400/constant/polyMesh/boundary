@@ -1,0 +1,39 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  written by cutmesh
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+4
+(
+    frontBack
+    {
+        type            empty;
+        nFaces          800;
+        startFace       399;
+    }
+    left
+    {
+        type            patch;
+        nFaces          1;
+        startFace       1199;
+    }
+    right
+    {
+        type            patch;
+        nFaces          1;
+        startFace       1200;
+    }
+    sides
+    {
+        type            empty;
+        nFaces          800;
+        startFace       1201;
+    }
+)

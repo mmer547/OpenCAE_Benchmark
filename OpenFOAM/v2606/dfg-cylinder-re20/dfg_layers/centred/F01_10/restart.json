@@ -1,0 +1,8 @@
+{
+  "source": "../../fitted/F01_10",
+  "method": "idw2d",
+  "fields": [
+    "U",
+    "p"
+  ]
+}

@@ -1,0 +1,234 @@
+solid frontBack
+facet normal 0.0 0.0 -1.0 
+outer loop
+vertex 0.15 0.15 0.0
+vertex 0.25 0.15 0.0
+vertex 2.2 0 0.0
+endloop
+endfacet
+facet normal 0.0 -0.0 -1.0 
+outer loop
+vertex 0.15 0.15 0.0
+vertex 2.2 0 0.0
+vertex 0 0 0.0
+endloop
+endfacet
+facet normal 0.0 0.0 1.0 
+outer loop
+vertex 0.15 0.15 0.005
+vertex 0 0 0.005
+vertex 2.2 0 0.005
+endloop
+endfacet
+facet normal -0.0 0.0 1.0 
+outer loop
+vertex 0.15 0.15 0.005
+vertex 2.2 0 0.005
+vertex 0.25 0.15 0.005
+endloop
+endfacet
+facet normal 0.0 0.0 -1.0 
+outer loop
+vertex 0.25 0.15 0.0
+vertex 0.25 0.25 0.0
+vertex 2.2 0.41 0.0
+endloop
+endfacet
+facet normal 0.0 0.0 -1.0 
+outer loop
+vertex 0.25 0.15 0.0
+vertex 2.2 0.41 0.0
+vertex 2.2 0 0.0
+endloop
+endfacet
+facet normal -0.0 0.0 1.0 
+outer loop
+vertex 0.25 0.15 0.005
+vertex 2.2 0 0.005
+vertex 2.2 0.41 0.005
+endloop
+endfacet
+facet normal 0.0 0.0 1.0 
+outer loop
+vertex 0.25 0.15 0.005
+vertex 2.2 0.41 0.005
+vertex 0.25 0.25 0.005
+endloop
+endfacet
+facet normal 0.0 0.0 -1.0 
+outer loop
+vertex 0.25 0.25 0.0
+vertex 0.15 0.25 0.0
+vertex 0 0.41 0.0
+endloop
+endfacet
+facet normal 0.0 0.0 -1.0 
+outer loop
+vertex 0.25 0.25 0.0
+vertex 0 0.41 0.0
+vertex 2.2 0.41 0.0
+endloop
+endfacet
+facet normal 0.0 -0.0 1.0 
+outer loop
+vertex 0.25 0.25 0.005
+vertex 2.2 0.41 0.005
+vertex 0 0.41 0.005
+endloop
+endfacet
+facet normal 0.0 0.0 1.0 
+outer loop
+vertex 0.25 0.25 0.005
+vertex 0 0.41 0.005
+vertex 0.15 0.25 0.005
+endloop
+endfacet
+facet normal 0.0 -0.0 -1.0 
+outer loop
+vertex 0.15 0.25 0.0
+vertex 0.15 0.15 0.0
+vertex 0 0 0.0
+endloop
+endfacet
+facet normal -0.0 0.0 -1.0 
+outer loop
+vertex 0.15 0.25 0.0
+vertex 0 0 0.0
+vertex 0 0.41 0.0
+endloop
+endfacet
+facet normal 0.0 0.0 1.0 
+outer loop
+vertex 0.15 0.25 0.005
+vertex 0 0.41 0.005
+vertex 0 0 0.005
+endloop
+endfacet
+facet normal 0.0 0.0 1.0 
+outer loop
+vertex 0.15 0.25 0.005
+vertex 0 0 0.005
+vertex 0.15 0.15 0.005
+endloop
+endfacet
+endsolid frontBack
+solid cylinder
+facet normal 0.0 1.0 0.0 
+outer loop
+vertex 0.25 0.15 0.0
+vertex 0.15 0.15 0.0
+vertex 0.15 0.15 0.005
+endloop
+endfacet
+facet normal 0.0 1.0 -0.0 
+outer loop
+vertex 0.25 0.15 0.0
+vertex 0.15 0.15 0.005
+vertex 0.25 0.15 0.005
+endloop
+endfacet
+facet normal -1.0 0.0 0.0 
+outer loop
+vertex 0.25 0.25 0.0
+vertex 0.25 0.15 0.0
+vertex 0.25 0.15 0.005
+endloop
+endfacet
+facet normal -1.0 0.0 0.0 
+outer loop
+vertex 0.25 0.25 0.0
+vertex 0.25 0.15 0.005
+vertex 0.25 0.25 0.005
+endloop
+endfacet
+facet normal 0.0 -1.0 0.0 
+outer loop
+vertex 0.15 0.25 0.0
+vertex 0.25 0.25 0.0
+vertex 0.25 0.25 0.005
+endloop
+endfacet
+facet normal 0.0 -1.0 0.0 
+outer loop
+vertex 0.15 0.25 0.0
+vertex 0.25 0.25 0.005
+vertex 0.15 0.25 0.005
+endloop
+endfacet
+facet normal 1.0 0.0 0.0 
+outer loop
+vertex 0.15 0.15 0.0
+vertex 0.15 0.25 0.0
+vertex 0.15 0.25 0.005
+endloop
+endfacet
+facet normal 1.0 0.0 0.0 
+outer loop
+vertex 0.15 0.15 0.0
+vertex 0.15 0.25 0.005
+vertex 0.15 0.15 0.005
+endloop
+endfacet
+endsolid cylinder
+solid walls
+facet normal 0.0 -1.0 0.0 
+outer loop
+vertex 0 0 0.0
+vertex 2.2 0 0.0
+vertex 2.2 0 0.005
+endloop
+endfacet
+facet normal 0.0 -1.0 0.0 
+outer loop
+vertex 0 0 0.0
+vertex 2.2 0 0.005
+vertex 0 0 0.005
+endloop
+endfacet
+facet normal 0.0 1.0 0.0 
+outer loop
+vertex 2.2 0.41 0.0
+vertex 0 0.41 0.0
+vertex 0 0.41 0.005
+endloop
+endfacet
+facet normal 0.0 1.0 -0.0 
+outer loop
+vertex 2.2 0.41 0.0
+vertex 0 0.41 0.005
+vertex 2.2 0.41 0.005
+endloop
+endfacet
+endsolid walls
+solid outlet
+facet normal 1.0 0.0 0.0 
+outer loop
+vertex 2.2 0 0.0
+vertex 2.2 0.41 0.0
+vertex 2.2 0.41 0.005
+endloop
+endfacet
+facet normal 1.0 0.0 0.0 
+outer loop
+vertex 2.2 0 0.0
+vertex 2.2 0.41 0.005
+vertex 2.2 0 0.005
+endloop
+endfacet
+endsolid outlet
+solid inlet
+facet normal -1.0 0.0 0.0 
+outer loop
+vertex 0 0.41 0.0
+vertex 0 0 0.0
+vertex 0 0 0.005
+endloop
+endfacet
+facet normal -1.0 0.0 0.0 
+outer loop
+vertex 0 0.41 0.0
+vertex 0 0 0.005
+vertex 0 0.41 0.005
+endloop
+endfacet
+endsolid inlet

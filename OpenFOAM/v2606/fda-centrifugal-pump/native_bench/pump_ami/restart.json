@@ -1,0 +1,11 @@
+{
+  "source": "../pump_mrf",
+  "method": "nearest3d",
+  "fields": [
+    "U",
+    "k",
+    "nut",
+    "omega",
+    "p"
+  ]
+}

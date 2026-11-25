@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+mode=${1:-base}
+case "$mode" in
+base|fine) cp "$here/parked.cpp" "$build/sample.cpp";;
+surface)
+  cp "$here/surface_sample.inc" "$build/"
+  sed -e '/^  std::ifstream file/i #include "surface_sample.inc"' -e 's/probes.push_back(sample(/probes.push_back(wallSample(/' "$here/parked.cpp" > "$build/sample.cpp";;
+*) echo "Choose: base fine surface" >&2; exit 2;;
+esac
+build_case
+geometry=("$here/rotor.stl" "$here/probes.csv")
+case "$mode" in
+base)
+  for method in halfway bouzidi; do
+    run "${method}_0.08" 0.08 "$method" "${geometry[@]}" 4000
+    run "${method}_0.06" 0.06 "$method" "${geometry[@]}" 5340
+  done;;
+fine) run wind_0.05 0.05 bouzidi "${geometry[@]}" 6400;;
+surface) run surface_0.06 0.06 bouzidi "${geometry[@]}" 5340;;
+esac

@@ -1,0 +1,20 @@
+{
+  "domain": "domain.stl",
+  "baseCellSize": 1,
+  "surfaceRefinement": {
+    "default": 0
+  },
+  "fillThinGaps": 0,
+  "fillThinWalls": 0,
+  "thinCutCells": 0,
+  "strictInput": true,
+  "patchTypes": {
+    "inlet": "patch",
+    "startup": "symmetry",
+    "emptyZ": "empty",
+    "lowerWall": "wall",
+    "upperWall": "wall",
+    "outlet": "patch"
+  },
+  "writeFormat": "ascii"
+}

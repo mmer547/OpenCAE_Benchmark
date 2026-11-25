@@ -1,0 +1,12 @@
+{
+  "source": "../pump_ami_turn2",
+  "method": "copy",
+  "fields": [
+    "U",
+    "k",
+    "nut",
+    "omega",
+    "p",
+    "phi"
+  ]
+}

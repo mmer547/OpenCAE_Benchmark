@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+cp "$here/cavity.cpp" "$build/sample.cpp"
+sed 's/Lattice<float,/Lattice<double,/g' "$OLB_ROOT/examples/thermal/squareCavity2d/laminar/case.h" > "$build/case.h"
+build_case
+for n in 32 64; do run "N$n" --RESOLUTION "$n"; done

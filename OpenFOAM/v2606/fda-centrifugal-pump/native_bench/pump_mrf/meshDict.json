@@ -1,0 +1,48 @@
+{
+  "domain": "domain.stl",
+  "baseCellSize": 0.0025,
+  "surfaceRefinement": {
+    "default": 1,
+    "blade": 2
+  },
+  "fillThinGaps": 1,
+  "fillThinWalls": 1,
+  "thinCutCells": 0,
+  "strictInput": true,
+  "patchTypes": {
+    "blade": "wall",
+    "housing": "wall",
+    "inlet": "patch",
+    "outlet": "patch"
+  },
+  "writeFormat": "ascii",
+  "bufferLayers": 2,
+  "rotatingZones": [
+    {
+      "name": "rotor",
+      "cylinder": {
+        "point1": [
+          0,
+          0,
+          -0.003
+        ],
+        "point2": [
+          0,
+          0,
+          0.022
+        ],
+        "radius": 0.028
+      },
+      "omega": 261.7993878,
+      "surfaceLevel": 1,
+      "volumeLevel": 1,
+      "nonRotatingPatches": [
+        "housing",
+        "inlet",
+        "outlet"
+      ]
+    }
+  ],
+  "amiExactRims": true,
+  "openfoam": "com"
+}

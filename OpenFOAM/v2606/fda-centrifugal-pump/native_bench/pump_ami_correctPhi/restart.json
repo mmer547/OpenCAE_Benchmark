@@ -1,0 +1,12 @@
+{
+  "source": "../pump_ami",
+  "method": "copy",
+  "fields": [
+    "U",
+    "k",
+    "nut",
+    "omega",
+    "p",
+    "phi"
+  ]
+}

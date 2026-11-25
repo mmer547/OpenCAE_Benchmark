@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+src="$OLB_ROOT/examples/multiComponent/youngLaplace2d/youngLaplace2d.cpp"
+      sed -e 's/const int vtkIter  = 200;/const int vtkIter  = 1000;/' -e '/vtmWriter.write( iT );/d' -e '/clout << "Pressure Difference:/i #include "droplet.inc"' "$src" > "$build/sample.cpp"
+      cp "$here/droplet.inc" "$build/"
+      build_case
+      for r in 15 20 25; do run "R$r" --RADIUS "$r"; done

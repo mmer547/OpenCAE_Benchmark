@@ -1,0 +1,8 @@
+{
+  "source": "../DFG20dt",
+  "method": "copy",
+  "fields": [
+    "U",
+    "p"
+  ]
+}

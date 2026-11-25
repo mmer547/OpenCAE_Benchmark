@@ -1,0 +1,10 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object controlDict;
+}
+application simpleFoam; startFrom startTime; startTime 0; stopAt endTime; writeFormat ascii; writePrecision 12; timePrecision 10; runTimeModifiable false;
+endTime 14000; deltaT 1; writeControl timeStep; writeInterval 14000;
+functions { cylinderCoeffs { type forceCoeffs; libs (forces); patches (cylinder); rho rhoInf; rhoInf 1; magUInf 0.2; lRef 0.1; Aref 0.001; dragDir (1 0 0); liftDir (0 1 0); pitchAxis (0 0 1); CofR (0.2 0.2 0); writeControl timeStep; writeInterval 1; log false; } }

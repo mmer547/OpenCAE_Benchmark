@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+cp "$here/pipe.cpp" "$build/sample.cpp"
+cp "$OLB_ROOT/examples/laminar/poiseuille3d/case.h" "$build/"
+build_case
+for n in 9 17 33; do
+  for method in halfway bouzidi; do
+    PIPE_WALL="$method" run "$method/N$n" --RESOLUTION "$n"
+  done
+done

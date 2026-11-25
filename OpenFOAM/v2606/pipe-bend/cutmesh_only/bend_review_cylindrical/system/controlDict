@@ -1,0 +1,9 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object controlDict;
+}
+application simpleFoam; startFrom startTime; startTime 0; stopAt endTime; endTime 1900; deltaT 1; writeControl runTime; writeInterval 1900; writeFormat ascii; writePrecision 11; timePrecision 10; runTimeModifiable false;
+functions { samples { type probes; libs (sampling); interpolationScheme cellPoint; fields (U); writeControl timeStep; writeInterval 20; probeLocations ((0.054 0.093530743609 0) (0.05 0.086602540378 0) (0.046 0.079674337148 0) (0.042 0.072746133918 0) (0.038 0.065817930688 0) (0.054 0.093530743609 0.018) (0.05 0.086602540378 0.018) (0.046 0.079674337148 0.018) (0.042 0.072746133918 0.018) (0.038 0.065817930688 0.018) (0.023375478305 0.10543996877 0) (0.021643961394 0.097629600712 0) (0.019912444482 0.089819232655 0) (0.018180927571 0.082008864598 0) (0.016449410659 0.074198496541 0) (0.023375478305 0.10543996877 0.018) (0.021643961394 0.097629600712 0.018) (0.019912444482 0.089819232655 0.018) (0.018180927571 0.082008864598 0.018) (0.016449410659 0.074198496541 0.018)); } }

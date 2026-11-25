@@ -1,0 +1,18 @@
+{
+  "domain": "domain.stl",
+  "baseCellSize": 0.03125,
+  "surfaceRefinement": {
+    "default": 0
+  },
+  "fillThinGaps": 0,
+  "fillThinWalls": 0,
+  "thinCutCells": 0,
+  "strictInput": true,
+  "patchTypes": {
+    "walls": "wall",
+    "ends": "patch"
+  },
+  "writeFormat": "ascii",
+  "mergeRatio": 0.03,
+  "snapTolerance": 0.2
+}

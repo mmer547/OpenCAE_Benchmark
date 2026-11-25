@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+mode=${1:-base}
+case "$mode" in
+base)
+src="$OLB_ROOT/examples/microfluidics/microChannel2d"
+      cp "$src/microChannel2d.h" "$build/"
+      # Keep time stepping intact. Permit a convergence exit only after the inlet ramp.
+      sed -i 's/if ( converge.hasConverged() )/if ( iT > 2*myCase.getLattice(NavierStokes{}).getUnitConverter().getLatticeTime(parameters.get<parameters::START_TIME>()) \&\& converge.hasConverged() )/' "$build/microChannel2d.h"
+      sed '/^  simulate(myCase);/r /dev/null' "$src/microChannel2d.cpp" | sed '/^  simulate(myCase);/a #include "channel.inc"' > "$build/sample.cpp"
+      cp "$here/channel.inc" "$build/"
+      build_case
+      for kn in 0.05 0.45; do
+        for n in 11 21; do
+          if [[ "$kn" == 0.05 ]]; then end=0.00004; interval=0.0000004; else end=0.000004; interval=0.00000004; fi
+          args=(--KNUDSEN "$kn" --RESOLUTION "$n" --MAX_PHYS_T "$end" --PHYS_INTERVAL "$interval")
+          run "kn${kn}_N${n}_pressure" "${args[@]}" --TEMPERATURE_LEFT 300 --TEMPERATURE_RIGHT 300
+          run "kn${kn}_N${n}_creep" "${args[@]}" --PRESSURE_DIFFERENCE 0
+          run "kn${kn}_N${n}_both" "${args[@]}"
+        done
+      done;;
+second-order)
+src="$OLB_ROOT/examples/microfluidics/microChannel2d"
+  cp "$src/microChannel2d.h" "$build"
+  sed -i 's/if ( converge.hasConverged() )/if ( iT > 2*myCase.getLattice(NavierStokes{}).getUnitConverter().getLatticeTime(parameters.get<parameters::START_TIME>()) \&\& converge.hasConverged() )/' "$build/microChannel2d.h"
+  # Fully developed planar Poiseuille flux: alpha*lambda + 2*beta*lambda^2/H.
+  sed -e '/return (2\. - myCaseParameters.get<ACCOMODATION_COEFF>/c\      return (1.11 + 2.*0.31*myCaseParameters.get<KNUDSEN>())*myCaseParameters.get<MFP>();' -e '/^  simulate(myCase);/a #include "channel.inc"' "$src/microChannel2d.cpp" > "$build/sample.cpp"
+  cp "$here/channel.inc" "$build"
+  grep -q '1.11 + 2' "$build/sample.cpp"
+  build_case channel
+  for kn in 0.05 0.45; do
+    if [[ $kn == 0.05 ]]; then end=.00004; interval=.0000004; else end=.000004; interval=.00000004; fi
+    for mode in pressure creep both; do
+      args=()
+      case "$mode" in pressure) args=(--TEMPERATURE_LEFT 300 --TEMPERATURE_RIGHT 300);; creep) args=(--PRESSURE_DIFFERENCE 0);; esac
+      run "channel_${kn}_${mode}" --KNUDSEN "$kn" --RESOLUTION 21 --MAX_PHYS_T "$end" --PHYS_INTERVAL "$interval" "${args[@]}"
+    done
+  done;;
+*) echo "Choose: base second-order" >&2; exit 2;;
+esac

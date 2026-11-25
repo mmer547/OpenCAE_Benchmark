@@ -1,0 +1,10 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object controlDict;
+}
+application interFoam; startFrom startTime; startTime 0; stopAt endTime; endTime 6; deltaT 0.001; writeControl adjustableRunTime; writeInterval 6; writeFormat ascii; writePrecision 11; timePrecision 10; runTimeModifiable false;
+adjustTimeStep yes; maxCo 0.55; maxAlphaCo 0.4; maxDeltaT .005;
+functions { depth { type probes; libs (sampling); probeLocations ((2.228 .50001 0.0268333333333) (2.228 .50001 0.0805) (2.228 .50001 0.134166666667) (2.228 .50001 0.1853125) (2.228 .50001 0.2339375) (2.228 .50001 0.2825625) (2.228 .50001 0.3311875) (2.228 .50001 0.3798125) (2.228 .50001 0.4284375) (2.228 .50001 0.4770625) (2.228 .50001 0.5256875) (2.228 .50001 0.575) (2.228 .50001 0.625) (2.228 .50001 0.675) (2.228 .50001 0.725) (2.228 .50001 0.775) (2.228 .50001 0.825) (2.228 .50001 0.875) (2.228 .50001 0.925) (2.228 .50001 0.975) (0.582 .50001 0.0268333333333) (0.582 .50001 0.0805) (0.582 .50001 0.134166666667) (0.582 .50001 0.1853125) (0.582 .50001 0.2339375) (0.582 .50001 0.2825625) (0.582 .50001 0.3311875) (0.582 .50001 0.3798125) (0.582 .50001 0.4284375) (0.582 .50001 0.4770625) (0.582 .50001 0.5256875) (0.582 .50001 0.575) (0.582 .50001 0.625) (0.582 .50001 0.675) (0.582 .50001 0.725) (0.582 .50001 0.775) (0.582 .50001 0.825) (0.582 .50001 0.875) (0.582 .50001 0.925) (0.582 .50001 0.975)); fields (alpha.water); writeControl runTime; writeInterval .01; } pressure { type probes; libs (sampling); probeLocations ((2.39549 .471 .021) (2.39549 .471 .101)); fields (p); writeControl timeStep; writeInterval 1; } }

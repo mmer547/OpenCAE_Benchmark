@@ -1,0 +1,20 @@
+DEBUT(LANG='EN')
+mesh = LIRE_MAILLAGE(UNITE=20, FORMAT='ASTER')
+model = AFFE_MODELE(MAILLAGE=mesh, AFFE=_F(TOUT='OUI', PHENOMENE='THERMIQUE', MODELISATION='PLAN'))
+mat = DEFI_MATERIAU(THER=_F(LAMBDA=35., RHO_CP=7200.*440.5))
+field = AFFE_MATERIAU(MAILLAGE=mesh, AFFE=_F(TOUT='OUI', MATER=mat))
+cold = AFFE_CHAR_THER(MODELE=model, TEMP_IMPO=_F(GROUP_MA='LEFT', TEMP=0.))
+hot = AFFE_CHAR_THER(MODELE=model, TEMP_IMPO=_F(GROUP_MA='RIGHT', TEMP=1.))
+wave = FORMULE(NOM_PARA='INST', VALE='100.*sin(pi*INST/40.)')
+times = DEFI_LIST_REEL(DEBUT=0., INTERVALLE=_F(JUSQU_A=32., NOMBRE=128))
+res = THER_LINEAIRE(TYPE_CALCUL='TRAN', MODELE=model, CHAM_MATER=field,
+                    EXCIT=(_F(CHARGE=cold), _F(CHARGE=hot, FONC_MULT=wave)),
+                    ETAT_INIT=_F(VALE=0.), INCREMENT=_F(LIST_INST=times),
+                    SCHEMA_TEMPS=_F(SCHEMA='HHT', THETA=0.5))
+probe = POST_RELEVE_T(ACTION=_F(INTITULE='probe', OPERATION='EXTRACTION', RESULTAT=res,
+                                NOM_CHAM='TEMP', GROUP_NO='PROBE', NOM_CMP='TEMP'))
+import json
+with open('fort.82','w') as output:
+    json.dump(probe.EXTR_TABLE().values(), output)
+IMPR_RESU(FORMAT='MED', UNITE=80, RESU=_F(RESULTAT=res, NOM_CHAM='TEMP'))
+FIN()

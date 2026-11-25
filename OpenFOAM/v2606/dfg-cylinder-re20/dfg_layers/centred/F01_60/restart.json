@@ -1,0 +1,8 @@
+{
+  "source": "../F01_40",
+  "method": "idw2d",
+  "fields": [
+    "U",
+    "p"
+  ]
+}

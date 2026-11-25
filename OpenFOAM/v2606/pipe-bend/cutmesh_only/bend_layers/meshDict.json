@@ -1,0 +1,33 @@
+{
+  "domain": "domain.stl",
+  "baseCellSize": 0.004,
+  "surfaceRefinement": {
+    "default": 0
+  },
+  "fillThinGaps": 0,
+  "fillThinWalls": 0,
+  "thinCutCells": 0,
+  "strictInput": true,
+  "patchTypes": {
+    "inlet": "patch",
+    "outlet": "patch",
+    "bottom": "wall",
+    "outer": "wall",
+    "top": "wall",
+    "inner": "wall"
+  },
+  "writeFormat": "ascii",
+  "addLayers": {
+    "patches": [
+      "outer",
+      "inner",
+      "top",
+      "bottom"
+    ],
+    "nLayers": 2,
+    "relativeSizes": false,
+    "expansionRatio": 1.25,
+    "finalLayerThickness": 0.00055,
+    "minThickness": 8e-05
+  }
+}

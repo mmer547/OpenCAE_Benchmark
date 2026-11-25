@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+source "$here/../common/build.sh"
+cp "$here/../common/cylinder.cpp" "$build/sample.cpp"
+cp "$OLB_ROOT/examples/laminar/cylinder2d/case.h" "$build/"
+build_case
+for n in 10 20; do
+    args=(--RESOLUTION "$n" --MAX_PHYS_T 160 --RAMP_UP_END_FRACTION 0.2)
+    for method in halfway bouzidi; do
+        OPENLB_CYLINDER_WALL="$method" run "$method/N$n" "${args[@]}"
+    done
+done
+export OPENLB_CYLINDER_WALL=bouzidi
+run cylinder20_N30 --RESOLUTION 30 --MAX_PHYS_T 36 --RAMP_UP_END_FRACTION 0.12 --LATTICE_RELAXATION_TIME 0.59 --PHYS_STAT_ITER_T 0.05

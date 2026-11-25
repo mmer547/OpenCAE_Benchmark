@@ -1,0 +1,21 @@
+{
+  "domain": "domain.stl",
+  "baseCellSize": 0.04,
+  "surfaceRefinement": {
+    "default": 0
+  },
+  "fillThinGaps": 0,
+  "fillThinWalls": 0,
+  "thinCutCells": 0,
+  "strictInput": true,
+  "patchTypes": {
+    "walls": "wall",
+    "core": "wall",
+    "ends": "patch"
+  },
+  "writeFormat": "ascii",
+  "autoGapRefinement": {
+    "cellsAcross": 2,
+    "maxLevel": 2
+  }
+}

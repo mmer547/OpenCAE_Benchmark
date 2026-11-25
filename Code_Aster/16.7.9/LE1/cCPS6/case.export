@@ -1,0 +1,8 @@
+P time_limit 240
+P memory_limit 2200
+P ncpus 1
+F comm case.comm D 1
+F libr mesh.mail D 20
+F mess case.mess R 6
+F rmed result.rmed R 80
+F libr extracted.json R 82

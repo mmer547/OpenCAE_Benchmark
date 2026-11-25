@@ -1,0 +1,8 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object fvSolution;
+}
+solvers {p {solver GAMG; smoother DICGaussSeidel; tolerance 1e-8; relTol .03;} "(U|k|omega)" {solver smoothSolver; smoother symGaussSeidel; tolerance 1e-9; relTol .07;} pFinal {$p; relTol 0;} "UFinal" {$U; relTol 0;} "kFinal" {$k; relTol 0;} "omegaFinal" {$omega; relTol 0;} pcorr {solver GAMG; smoother GaussSeidel; tolerance 1e-6; relTol 0;} pcorrFinal {$pcorr; relTol 0;}} PIMPLE {momentumPredictor yes; nOuterCorrectors 2; nCorrectors 2; nNonOrthogonalCorrectors 1; correctPhi no;} relaxationFactors { equations {".*" 1;} }

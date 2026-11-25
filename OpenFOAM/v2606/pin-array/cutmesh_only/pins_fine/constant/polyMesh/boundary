@@ -1,0 +1,54 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  written by cutmesh
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+6
+(
+    ceiling
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          10460;
+        startFace       609060;
+    }
+    mid
+    {
+        type            symmetryPlane;
+        nFaces          10460;
+        startFace       619520;
+    }
+    side
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          10560;
+        startFace       629980;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          800;
+        startFace       640540;
+    }
+    inlet
+    {
+        type            patch;
+        nFaces          800;
+        startFace       641340;
+    }
+    pins
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          4000;
+        startFace       642140;
+    }
+)

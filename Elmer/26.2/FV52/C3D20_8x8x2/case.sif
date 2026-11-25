@@ -1,0 +1,65 @@
+Header
+  Mesh DB "." "mesh"
+End
+
+Simulation
+  Coordinate System = Cartesian 3D
+  Simulation Type = Steady State
+  Steady State Max Iterations = 1
+  Max Output Level = 4
+End
+
+Constants
+  Stefan Boltzmann = 5.67e-8
+End
+
+Body 1
+  Target Bodies(1) = 1
+  Equation = 1
+  Material = 1
+End
+
+Equation 1
+  Active Solvers(3) = 1 2 3
+End
+
+Material 1
+  Youngs Modulus = 2E11
+  Poisson Ratio = 0.3
+  Density = 8000
+End
+
+Solver 1
+  Equation = "Stress Analysis"
+  Procedure = "StressSolve" "StressSolver"
+  Variable = -dofs 3 Displacement
+  Eigen Analysis = True
+  Eigen System Values = 14
+  Linear System Symmetric = True
+  Eigen System Shift = -100
+  Eigen System Select = Smallest Magnitude
+  Linear System Solver = Direct
+  Linear System Direct Method = umfpack
+  Linear System Convergence Tolerance = 1e-10
+End
+
+Solver 2
+  Equation = "Save eigenvalues"
+  Procedure = "SaveData" "SaveScalars"
+  Filename = "eigenvalues.dat"
+  Save Eigenvalues = True
+End
+
+Solver 3
+  Equation = "Modes"
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+  Output File Name = "modes"
+  Vtu Format = True
+  Binary Output = False
+  Single Precision = False
+End
+
+Boundary Condition 1
+  Target Boundaries(1) = 1
+  Displacement 3 = 0
+End

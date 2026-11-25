@@ -1,0 +1,55 @@
+{
+  "domain": "domain.stl",
+  "baseCellSize": 0.0390625,
+  "surfaceRefinement": {
+    "default": 0
+  },
+  "fillThinGaps": 0,
+  "fillThinWalls": 0,
+  "thinCutCells": 0,
+  "strictInput": true,
+  "patchTypes": {
+    "inner": "wall",
+    "outer": "wall",
+    "frontBack": "empty"
+  },
+  "writeFormat": "ascii",
+  "baseMesh": {
+    "type": "cylindrical",
+    "axis": [
+      0,
+      0,
+      1
+    ],
+    "origin": [
+      0,
+      0,
+      0
+    ],
+    "zRange": [
+      -0.03125,
+      0.0625
+    ],
+    "nz": 3,
+    "core": {
+      "halfWidth": 0.45,
+      "n": 96
+    },
+    "blocks": [
+      {
+        "rOuter": 1.0,
+        "nr": 32
+      },
+      {
+        "rOuter": 2.0,
+        "nr": 32,
+        "nTheta": 384
+      },
+      {
+        "rOuter": 2.03125,
+        "nr": 1,
+        "nTheta": 384
+      }
+    ]
+  }
+}
